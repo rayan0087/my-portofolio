@@ -19,9 +19,7 @@ export default function HackathonsSection() {
           <div className="flex flex-col gap-y-3 items-center justify-center">
             <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl">I like building things</h2>
             <p className="text-muted-foreground md:text-lg/relaxed lg:text-base/relaxed xl:text-lg/relaxed text-balance text-center">
-              During my time in university, I attended {DATA.hackathons.length}+
-              hackathons. People from around the country would come together and
-              build incredible things in 2-3 days. It was eye-opening to see the endless possibilities brought to life by a group of motivated and passionate individuals.
+              Throughout my career, I have participated in over {DATA.hackathons.length} competitions to hone my skills and gain experience. I believe that participating in competitions is a great way to learn and grow as a programmer. Additionally, I enjoy working in teams and collaborating with like-minded individuals.
             </p>
           </div>
         </div>
