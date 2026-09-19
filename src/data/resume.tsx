@@ -158,8 +158,17 @@ export const DATA = {
         //   icon: <Icons.globe className="size-3" />,
         // },
       ],
-      image: "/logo_grafika.png",
-      // video:"https://pub-83c5db439b40468498f97946200806f7.r2.dev/chat-collect.mp4",
+      image: "/projects/alishaqiy/thumbnail.png",
+      images: [
+        "/projects/alishaqiy/thumbnail.png",
+        "/projects/alishaqiy/menu.png",
+        "/projects/alishaqiy/dashboard.png",
+        "/projects/alishaqiy/manajemen_rs.png",
+        "/projects/alishaqiy/antrian.png",
+        "/projects/alishaqiy/registrasi.png",
+        "/projects/alishaqiy/penunjang_medis.png",
+        "/projects/alishaqiy/farmasi.png",
+      ],
     },
     {
       title: "Muji Rahayu Hospital Information Management System",
@@ -175,15 +184,20 @@ export const DATA = {
         "XML",
         "CSS",
       ],
-      links: [
-        // {
-        //   type: "Website",
-        //   href: "https://chatcollect.com",
-        //   icon: <Icons.globe className="size-3" />,
-        // },
+      links: [],
+      image: "/projects/mujirahayu/thumbnail.png",
+      images: [
+        "/projects/mujirahayu/thumbnail.png",
+        "/projects/mujirahayu/dashboard.png",
+        "/projects/mujirahayu/menu.png",
+        "/projects/mujirahayu/satusehat.png",
+        "/projects/mujirahayu/manajemen_rs.png",
+        "/projects/mujirahayu/registrasi.png",
+        "/projects/mujirahayu/farmasi.png",
+        "/projects/mujirahayu/logistik.png",
+        "/projects/mujirahayu/penagihan.png",
+        "/projects/mujirahayu/stok.png",
       ],
-      image: "/logo_grafika.png",
-      // video:"https://pub-83c5db439b40468498f97946200806f7.r2.dev/chat-collect.mp4",
     },
     {
       title: "Integration of Bank BSI and IBS Alhamrah",
@@ -199,15 +213,13 @@ export const DATA = {
         "XML",
         "CSS",
       ],
-      links: [
-        // {
-        //   type: "Website",
-        //   href: "https://chatcollect.com",
-        //   icon: <Icons.globe className="size-3" />,
-        // },
+      links: [],
+      image: "/projects/ibs-alhamrah/thumbnail.png",
+      images: [
+        "/projects/ibs-alhamrah/thumbnail.png",
+        "/projects/ibs-alhamrah/billing_bsi.png",
+        "/projects/ibs-alhamrah/log_api.png",
       ],
-      image: "/logo_grafika.png",
-      // video:"https://pub-83c5db439b40468498f97946200806f7.r2.dev/chat-collect.mp4",
     },
     {
       title: "Unisma Islamic Hospital E-Pharmacy",
@@ -223,15 +235,19 @@ export const DATA = {
         "XML",
         "CSS",
       ],
-      links: [
-        // {
-        //   type: "Website",
-        //   href: "https://chatcollect.com",
-        //   icon: <Icons.globe className="size-3" />,
-        // },
+      links: [],
+      image: "/projects/efarmasiunisma/thumbnail.png",
+      images: [
+        "/projects/efarmasiunisma/thumbnail.png",
+        "/projects/efarmasiunisma/menu.png",
+        "/projects/efarmasiunisma/manajemen_rs.png",
+        "/projects/efarmasiunisma/e_resep.png",
+        "/projects/efarmasiunisma/e_resep_detail.png",
+        "/projects/efarmasiunisma/logistik.png",
+        "/projects/efarmasiunisma/penawaran.png",
+        "/projects/efarmasiunisma/penagihan.png",
+        "/projects/efarmasiunisma/profit_loss.png",
       ],
-      image: "/logo_grafika.png",
-      // video:"https://pub-83c5db439b40468498f97946200806f7.r2.dev/chat-collect.mp4",
     },
     {
       title: "ISHK Tolaram Eye Care Hospital Information Management System",
@@ -247,20 +263,14 @@ export const DATA = {
         "XML",
         "CSS",
       ],
-      links: [
-        // {
-        //   type: "Website",
-        //   href: "https://magicui.design",
-        //   icon: <Icons.globe className="size-3" />,
-        // },
-        // {
-        //   type: "Source",
-        //   href: "https://github.com/magicuidesign/magicui",
-        //   icon: <Icons.github className="size-3" />,
-        // },
+      links: [],
+      image: "/projects/mujirahayu/manajemen_rs.png",
+      images: [
+        "/projects/mujirahayu/manajemen_rs.png",
+        "/projects/mujirahayu/antrian.png",
+        "/projects/mujirahayu/registrasi.png",
+        "/projects/mujirahayu/farmasi.png",
       ],
-      image: "/logo_grafika.png",
-      // video: "https://cdn.magicui.design/bento-grid.mp4",
     },
     {
       title: "ERP System PT. Aneka Jasa Grahdika",
@@ -276,20 +286,14 @@ export const DATA = {
         "XML",
         "CSS",
       ],
-      links: [
-        // {
-        //   type: "Website",
-        //   href: "https://llm.report",
-        //   icon: <Icons.globe className="size-3" />,
-        // },
-        // {
-        //   type: "Source",
-        //   href: "https://github.com/dillionverma/llm.report",
-        //   icon: <Icons.github className="size-3" />,
-        // },
+      links: [],
+      image: "/projects/efarmasiunisma/logistik.png",
+      images: [
+        "/projects/efarmasiunisma/logistik.png",
+        "/projects/efarmasiunisma/penawaran.png",
+        "/projects/efarmasiunisma/penagihan.png",
+        "/projects/efarmasiunisma/profit_loss.png",
       ],
-      image: "/logo_grafika.png",
-      // video: "https://cdn.llm.report/openai-demo.mp4",
     },
     {
       title: "Sistem ERP PT. Graha Cipta Sejahtera",
@@ -305,20 +309,14 @@ export const DATA = {
         "XML",
         "CSS",
       ],
-      links: [
-        // {
-        //   type: "Website",
-        //   href: "https://llm.report",
-        //   icon: <Icons.globe className="size-3" />,
-        // },
-        // {
-        //   type: "Source",
-        //   href: "https://github.com/dillionverma/llm.report",
-        //   icon: <Icons.github className="size-3" />,
-        // },
+      links: [],
+      image: "/projects/efarmasiunisma/penagihan.png",
+      images: [
+        "/projects/efarmasiunisma/penagihan.png",
+        "/projects/efarmasiunisma/profit_loss.png",
+        "/projects/mujirahayu/stok.png",
+        "/projects/efarmasiunisma/logistik.png",
       ],
-      image: "/logo_grafika.png",
-      // video: "https://cdn.llm.report/openai-demo.mp4",
     },
     
   ],
