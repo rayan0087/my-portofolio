@@ -66,7 +66,7 @@ export function ProjectCard({
     <div
       onClick={handleCardClick}
       className={cn(
-        "flex flex-col h-full border border-border rounded-xl overflow-hidden hover:ring-2 cursor-pointer hover:ring-muted transition-all duration-200 group/card",
+        "flex flex-col h-full bg-card text-card-foreground border border-border rounded-xl overflow-hidden hover:ring-2 cursor-pointer hover:ring-muted transition-all duration-200 group/card",
         className
       )}
     >

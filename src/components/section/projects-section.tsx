@@ -1,6 +1,5 @@
 "use client";
 
-import BlurFade from "@/components/magicui/blur-fade";
 import { ProjectCard } from "@/components/project-card";
 import { ProjectPreviewModal, ProjectPreviewData } from "@/components/project-preview-modal";
 import { Button } from "@/components/ui/button";
@@ -8,7 +7,6 @@ import { DATA } from "@/data/resume";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { useState } from "react";
 
-const BLUR_FADE_DELAY = 0.04;
 const PROJECTS_PER_PAGE = 4;
 
 export default function ProjectsSection() {
@@ -32,7 +30,7 @@ export default function ProjectsSection() {
   };
 
   return (
-    <section id="projects">
+    <div className="w-full">
       <div className="flex min-h-0 flex-col gap-y-8">
         <div className="flex flex-col gap-y-4 items-center justify-center">
           <div className="flex items-center w-full">
@@ -54,38 +52,32 @@ export default function ProjectsSection() {
         </div>
 
         {/* Project Grid (Only current page items are rendered to keep DOM & network light) */}
-        <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 max-w-[800px] mx-auto auto-rows-fr w-full">
-          {currentProjects.map((project, id) => (
-            <BlurFade
-              key={`${currentPage}-${project.title}`}
-              delay={BLUR_FADE_DELAY * 4 + id * 0.05}
-              className="h-full"
-            >
-              <ProjectCard
-                href={project.href}
-                key={project.title}
-                title={project.title}
-                description={project.description}
-                dates={project.dates}
-                tags={project.technologies}
-                image={project.image}
-                video={"video" in project ? (project.video as string) : undefined}
-                links={project.links}
-                onPreview={() =>
-                  setSelectedProject({
-                    title: project.title,
-                    href: project.href,
-                    description: project.description,
-                    dates: project.dates,
-                    tags: project.technologies,
-                    image: project.image,
-                    images: "images" in project ? (project.images as readonly string[]) : undefined,
-                    video: "video" in project ? (project.video as string) : undefined,
-                    links: project.links,
-                  })
-                }
-              />
-            </BlurFade>
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 max-w-[800px] mx-auto w-full">
+          {currentProjects.map((project) => (
+            <ProjectCard
+              key={project.title}
+              href={project.href}
+              title={project.title}
+              description={project.description}
+              dates={project.dates}
+              tags={project.technologies}
+              image={project.image}
+              video={"video" in project ? (project.video as string) : undefined}
+              links={project.links}
+              onPreview={() =>
+                setSelectedProject({
+                  title: project.title,
+                  href: project.href,
+                  description: project.description,
+                  dates: project.dates,
+                  tags: project.technologies,
+                  image: project.image,
+                  images: "images" in project ? (project.images as readonly string[]) : undefined,
+                  video: "video" in project ? (project.video as string) : undefined,
+                  links: project.links,
+                })
+              }
+            />
           ))}
         </div>
 
@@ -145,6 +137,6 @@ export default function ProjectsSection() {
           onClose={() => setSelectedProject(null)}
         />
       )}
-    </section>
+    </div>
   );
 }
