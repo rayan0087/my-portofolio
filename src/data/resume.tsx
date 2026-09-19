@@ -1,7 +1,7 @@
 import { Icons } from "@/components/icons";
 import { HomeIcon, NotebookIcon } from "lucide-react";
 import { Jquery } from "@/components/ui/svgs/jquery";
-import { Typescript } from "@/components/ui/svgs/typescript";
+import { Html } from "@/components/ui/svgs/html";
 import { Python } from "@/components/ui/svgs/python";
 import { Odoo } from "@/components/ui/svgs/odoo";
 import { Postgresql } from "@/components/ui/svgs/postgresql";
@@ -26,7 +26,7 @@ export const DATA = {
   skills: [
     { name: "Odoo", icon: Odoo },
     { name: "Python", icon: Python },
-    { name: "HTML", icon: Typescript },
+    { name: "HTML", icon: Html },
     { name: "CSS", icon: Css },
     { name: "PHP", icon: Php },
     { name: "Java", icon: Java },
