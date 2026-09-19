@@ -40,6 +40,7 @@ interface Props {
     href: string;
   }[];
   className?: string;
+  onPreview?: () => void;
 }
 
 export function ProjectCard({
@@ -53,36 +54,46 @@ export function ProjectCard({
   video,
   links,
   className,
+  onPreview,
 }: Props) {
+  const handleCardClick = () => {
+    if (onPreview) {
+      onPreview();
+    }
+  };
+
   return (
     <div
+      onClick={handleCardClick}
       className={cn(
-        "flex flex-col h-full border border-border rounded-xl overflow-hidden hover:ring-2 cursor-pointer hover:ring-muted transition-all duration-200",
+        "flex flex-col h-full border border-border rounded-xl overflow-hidden hover:ring-2 cursor-pointer hover:ring-muted transition-all duration-200 group/card",
         className
       )}
     >
-      <div className="relative shrink-0">
-        <Link
-          href={href || "#"}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="block"
-        >
-          {video ? (
-            <video
-              src={video}
-              autoPlay
-              loop
-              muted
-              playsInline
-              className="w-full h-48 object-cover"
-            />
-          ) : image ? (
+      <div className="relative shrink-0 overflow-hidden">
+        {video ? (
+          <video
+            src={video}
+            autoPlay
+            loop
+            muted
+            playsInline
+            className="w-full h-48 object-cover"
+          />
+        ) : image ? (
+          <div className="relative">
             <ProjectImage src={image} alt={title} />
-          ) : (
-            <div className="w-full h-48 bg-muted" />
-          )}
-        </Link>
+            {onPreview && (
+              <div className="absolute inset-0 bg-black/40 opacity-0 group-hover/card:opacity-100 transition-opacity duration-200 flex items-center justify-center">
+                <span className="bg-background/90 text-foreground text-xs font-medium px-3 py-1.5 rounded-full shadow-sm">
+                  Click to Preview
+                </span>
+              </div>
+            )}
+          </div>
+        ) : (
+          <div className="w-full h-48 bg-muted" />
+        )}
         {links && links.length > 0 && (
           <div className="absolute top-2 right-2 flex flex-wrap gap-2">
             {links.map((link, idx) => (
@@ -115,6 +126,7 @@ export function ProjectCard({
             href={href || "#"}
             target="_blank"
             rel="noopener noreferrer"
+            onClick={(e) => e.stopPropagation()}
             className="text-muted-foreground hover:text-foreground transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 rounded-sm"
             aria-label={`Open ${title}`}
           >
