@@ -5,7 +5,8 @@ import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { ChevronLeft, ChevronRight, ExternalLink, X } from "lucide-react";
 import Link from "next/link";
-import { useEffect, useState, useCallback } from "react";
+import { useEffect, useState, useCallback, useSyncExternalStore } from "react";
+import { createPortal } from "react-dom";
 import Markdown from "react-markdown";
 
 export interface ProjectPreviewData {
@@ -29,8 +30,15 @@ interface Props {
   onClose: () => void;
 }
 
+const emptySubscribe = () => () => {};
+
 export function ProjectPreviewModal({ project, onClose }: Props) {
   const [currentSlide, setCurrentSlide] = useState(0);
+  const isClient = useSyncExternalStore(
+    emptySubscribe,
+    () => true,
+    () => false
+  );
 
   // Collect all slides (images or single image fallback)
   const slides: string[] = [];
@@ -52,7 +60,7 @@ export function ProjectPreviewModal({ project, onClose }: Props) {
     }
   }, [slides.length]);
 
-  // Handle keyboard events (ESC, Arrow keys)
+  // Handle keyboard events (ESC, Arrow keys) and lock background scroll
   useEffect(() => {
     if (!project) return;
 
@@ -67,39 +75,39 @@ export function ProjectPreviewModal({ project, onClose }: Props) {
     };
 
     window.addEventListener("keydown", handleKeyDown);
-    // Prevent background scrolling while modal is open
+    const originalOverflow = document.body.style.overflow;
     document.body.style.overflow = "hidden";
 
     return () => {
       window.removeEventListener("keydown", handleKeyDown);
-      document.body.style.overflow = "unset";
+      document.body.style.overflow = originalOverflow;
     };
   }, [project, handleNext, handlePrev, onClose]);
 
-  if (!project) return null;
+  if (!project || !isClient) return null;
 
-  return (
+  return createPortal(
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-black/70 backdrop-blur-md transition-opacity duration-200 animate-in fade-in"
+      className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-6 bg-black/80 backdrop-blur-md transition-all duration-200 animate-in fade-in"
       onClick={onClose}
       role="dialog"
       aria-modal="true"
     >
       <div
-        className="relative w-full max-w-3xl max-h-[90vh] bg-background border border-border rounded-2xl shadow-2xl flex flex-col overflow-hidden animate-in zoom-in-95 duration-200"
+        className="relative w-full max-w-2xl max-h-[90vh] bg-background border border-border rounded-2xl shadow-2xl flex flex-col overflow-hidden animate-in zoom-in-95 duration-200"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header with Close Button */}
         <div className="flex items-center justify-between px-6 py-4 border-b border-border bg-muted/40">
-          <div>
-            <h2 className="text-xl font-bold tracking-tight text-foreground">
+          <div className="pr-4">
+            <h2 className="text-lg sm:text-xl font-bold tracking-tight text-foreground leading-snug">
               {project.title}
             </h2>
             <p className="text-xs text-muted-foreground mt-0.5">{project.dates}</p>
           </div>
           <button
             onClick={onClose}
-            className="rounded-full p-2 text-muted-foreground hover:text-foreground hover:bg-muted transition-colors"
+            className="rounded-full p-2 text-muted-foreground hover:text-foreground hover:bg-muted transition-colors shrink-0"
             aria-label="Close modal"
           >
             <X className="size-5" />
@@ -107,9 +115,9 @@ export function ProjectPreviewModal({ project, onClose }: Props) {
         </div>
 
         {/* Content Body (Scrollable) */}
-        <div className="flex-1 overflow-y-auto p-6 space-y-6">
+        <div className="flex-1 overflow-y-auto p-5 sm:p-6 space-y-6">
           {/* Image Slider / Preview */}
-          <div className="relative w-full bg-muted/50 rounded-xl overflow-hidden border border-border aspect-video max-h-[380px] flex items-center justify-center group">
+          <div className="relative w-full bg-muted/30 rounded-xl overflow-hidden border border-border aspect-video max-h-[360px] flex items-center justify-center group">
             {project.video ? (
               <video
                 src={project.video}
@@ -120,13 +128,13 @@ export function ProjectPreviewModal({ project, onClose }: Props) {
                 className="w-full h-full object-cover"
               />
             ) : slides.length > 0 ? (
-              <div className="relative w-full h-full flex items-center justify-center bg-black/10 dark:bg-black/30">
-                {/* Current Slide Image - only the active slide is eagerly rendered */}
+              <div className="relative w-full h-full flex items-center justify-center bg-black/5 dark:bg-black/30 p-2">
+                {/* Current Slide Image */}
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   src={slides[currentSlide]}
                   alt={`${project.title} preview slide ${currentSlide + 1}`}
-                  className="max-w-full max-h-full object-contain transition-all duration-300"
+                  className="max-w-full max-h-full object-contain rounded-lg transition-all duration-300"
                   loading="eager"
                 />
 
@@ -144,26 +152,26 @@ export function ProjectPreviewModal({ project, onClose }: Props) {
                   <>
                     <button
                       onClick={handlePrev}
-                      className="absolute left-3 top-1/2 -translate-y-1/2 size-9 rounded-full bg-black/60 hover:bg-black/80 text-white flex items-center justify-center transition-transform hover:scale-105 active:scale-95 shadow-md"
+                      className="absolute left-3 top-1/2 -translate-y-1/2 size-9 rounded-full bg-black/70 hover:bg-black/90 text-white flex items-center justify-center transition-transform hover:scale-105 active:scale-95 shadow-md"
                       aria-label="Previous slide"
                     >
                       <ChevronLeft className="size-5" />
                     </button>
                     <button
                       onClick={handleNext}
-                      className="absolute right-3 top-1/2 -translate-y-1/2 size-9 rounded-full bg-black/60 hover:bg-black/80 text-white flex items-center justify-center transition-transform hover:scale-105 active:scale-95 shadow-md"
+                      className="absolute right-3 top-1/2 -translate-y-1/2 size-9 rounded-full bg-black/70 hover:bg-black/90 text-white flex items-center justify-center transition-transform hover:scale-105 active:scale-95 shadow-md"
                       aria-label="Next slide"
                     >
                       <ChevronRight className="size-5" />
                     </button>
 
                     {/* Counter Badge */}
-                    <div className="absolute top-3 right-3 bg-black/60 backdrop-blur-xs text-white text-xs px-2.5 py-1 rounded-full font-medium shadow-sm">
+                    <div className="absolute top-3 right-3 bg-black/70 backdrop-blur-xs text-white text-xs px-2.5 py-1 rounded-full font-medium shadow-sm">
                       {currentSlide + 1} / {slides.length}
                     </div>
 
                     {/* Bottom Dots Indicator */}
-                    <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex items-center gap-1.5 bg-black/40 backdrop-blur-xs px-2.5 py-1 rounded-full">
+                    <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex items-center gap-1.5 bg-black/50 backdrop-blur-xs px-2.5 py-1 rounded-full">
                       {slides.map((_, idx) => (
                         <button
                           key={idx}
@@ -252,6 +260,7 @@ export function ProjectPreviewModal({ project, onClose }: Props) {
           </Button>
         </div>
       </div>
-    </div>
+    </div>,
+    document.body
   );
 }
