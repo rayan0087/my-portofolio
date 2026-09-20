@@ -1,7 +1,7 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { X, ZoomIn } from "lucide-react";
+import { X, ZoomIn, ZoomOut } from "lucide-react";
 import { useEffect, useState, useSyncExternalStore } from "react";
 import { createPortal } from "react-dom";
 
@@ -59,11 +59,11 @@ export function CertificatePreviewModal({ certificate, onClose }: Props) {
       aria-modal="true"
     >
       <div
-        className="relative w-full max-w-4xl max-h-[92vh] bg-background border border-border rounded-2xl shadow-2xl flex flex-col overflow-hidden animate-in zoom-in-95 duration-200"
+        className="relative w-full max-w-4xl h-[86vh] sm:h-[88vh] bg-background border border-border rounded-2xl shadow-2xl flex flex-col overflow-hidden animate-in zoom-in-95 duration-200"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header */}
-        <div className="flex items-center justify-between px-5 sm:px-6 py-4 border-b border-border bg-muted/40">
+        <div className="flex items-center justify-between px-5 sm:px-6 py-4 border-b border-border bg-muted/40 shrink-0">
           <div className="pr-4">
             <h2 className="text-base sm:text-lg font-bold tracking-tight text-foreground leading-snug">
               {certificate.title}
@@ -84,32 +84,36 @@ export function CertificatePreviewModal({ certificate, onClose }: Props) {
         </div>
 
         {/* Certificate Image View */}
-        <div className="flex-1 overflow-y-auto p-4 sm:p-6 flex flex-col items-center justify-center bg-black/5 dark:bg-black/40">
-          <div
-            className={`relative max-w-full overflow-hidden rounded-xl border border-border shadow-lg transition-all duration-300 ${
-              isZoomed ? "cursor-zoom-out max-h-none" : "cursor-zoom-in max-h-[62vh]"
-            }`}
-            onClick={() => setIsZoomed(!isZoomed)}
-            title={isZoomed ? "Click to zoom out" : "Click to zoom in"}
-          >
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src={certificate.image}
-              alt={certificate.title}
-              className={`w-auto mx-auto object-contain transition-transform duration-300 ${
-                isZoomed ? "scale-125" : "max-h-[60vh]"
+        <div className="flex-1 min-h-0 w-full overflow-hidden flex flex-col items-center justify-between bg-black/5 dark:bg-black/40 p-4 sm:p-6">
+          <div className="flex-1 min-h-0 w-full flex items-center justify-center overflow-auto p-2">
+            <div
+              className={`relative transition-transform duration-300 ease-out select-none ${
+                isZoomed ? "cursor-zoom-out scale-125 sm:scale-135" : "cursor-zoom-in scale-100"
               }`}
-            />
+              onClick={() => setIsZoomed(!isZoomed)}
+              title={isZoomed ? "Klik untuk memperkecil" : "Klik untuk memperbesar"}
+            >
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={certificate.image}
+                alt={certificate.title}
+                className="max-h-[58vh] sm:max-h-[62vh] w-auto max-w-full mx-auto object-contain rounded-xl border border-border shadow-lg"
+              />
+            </div>
           </div>
 
-          <p className="text-[11px] text-muted-foreground mt-3 flex items-center gap-1">
-            <ZoomIn className="size-3" />
-            Klik gambar untuk {isZoomed ? "memperkecil" : "memperbesar"}
-          </p>
+          <button
+            type="button"
+            onClick={() => setIsZoomed(!isZoomed)}
+            className="text-[11px] text-muted-foreground mt-2 flex items-center gap-1.5 hover:text-foreground transition-colors cursor-pointer shrink-0"
+          >
+            {isZoomed ? <ZoomOut className="size-3.5" /> : <ZoomIn className="size-3.5" />}
+            <span>Klik gambar untuk {isZoomed ? "memperkecil" : "memperbesar"}</span>
+          </button>
         </div>
 
         {/* Footer Actions */}
-        <div className="px-5 sm:px-6 py-3.5 border-t border-border bg-muted/20 flex items-center justify-end">
+        <div className="px-5 sm:px-6 py-3.5 border-t border-border bg-muted/20 flex items-center justify-end shrink-0">
           <Button size="sm" variant="outline" onClick={onClose} className="text-xs cursor-pointer">
             Tutup
           </Button>
