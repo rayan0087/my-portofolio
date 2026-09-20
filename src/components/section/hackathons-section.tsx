@@ -81,16 +81,16 @@ export default function HackathonsSection() {
                       {/* Interactive certificate card preview */}
                       <div
                         onClick={() => setSelectedCertificate(cert)}
-                        className="group relative w-full max-w-sm overflow-hidden rounded-xl border border-border bg-card/60 hover:border-primary/50 shadow-xs hover:shadow-md transition-all duration-300 cursor-pointer"
+                        className="relative w-full max-w-sm overflow-hidden rounded-xl border border-border bg-card/60 hover:border-primary/50 shadow-xs hover:shadow-md transition-all duration-300 cursor-pointer"
                       >
-                        <div className="relative aspect-[16/11] w-full overflow-hidden bg-muted/20">
+                        <div className="relative group/certimg aspect-[16/11] w-full overflow-hidden bg-muted/20">
                           <img
                             src={cert.image}
                             alt={cert.title}
-                            className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-300"
+                            className="w-full h-full object-cover object-center group-hover/certimg:scale-105 transition-transform duration-300"
                             loading="lazy"
                           />
-                          <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-200 flex items-center justify-center gap-2 text-white text-xs font-medium backdrop-blur-[1px]">
+                          <div className="pointer-events-none absolute inset-0 bg-black/40 opacity-0 group-hover/certimg:opacity-100 transition-opacity duration-200 flex items-center justify-center gap-2 text-white text-xs font-medium backdrop-blur-[1px]">
                             <Eye className="size-4" />
                             <span>Buka Preview Sertifikat</span>
                           </div>
@@ -100,7 +100,7 @@ export default function HackathonsSection() {
                             <Award className="size-3.5 text-primary shrink-0" />
                             <span className="truncate">{cert.title}</span>
                           </div>
-                          <span className="text-[11px] text-muted-foreground shrink-0 ml-2 group-hover:text-primary transition-colors">
+                          <span className="text-[11px] text-muted-foreground shrink-0 ml-2">
                             Preview ↗
                           </span>
                         </div>

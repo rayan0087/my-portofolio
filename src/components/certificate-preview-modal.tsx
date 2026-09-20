@@ -1,8 +1,7 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { Download, ExternalLink, X, ZoomIn } from "lucide-react";
-import Link from "next/link";
+import { X, ZoomIn } from "lucide-react";
 import { useEffect, useState, useSyncExternalStore } from "react";
 import { createPortal } from "react-dom";
 
@@ -110,34 +109,8 @@ export function CertificatePreviewModal({ certificate, onClose }: Props) {
         </div>
 
         {/* Footer Actions */}
-        <div className="px-5 sm:px-6 py-3.5 border-t border-border bg-muted/20 flex flex-wrap items-center justify-between gap-3">
-          <div className="flex flex-wrap items-center gap-2">
-            {certificate.pdf && (
-              <Link
-                href={certificate.pdf}
-                target="_blank"
-                rel="noopener noreferrer"
-                download
-              >
-                <Button size="sm" variant="default" className="gap-1.5 text-xs cursor-pointer">
-                  <Download className="size-3.5" />
-                  Unduh PDF
-                </Button>
-              </Link>
-            )}
-            <Link
-              href={certificate.image}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <Button size="sm" variant="outline" className="gap-1.5 text-xs cursor-pointer">
-                <ExternalLink className="size-3.5" />
-                Buka Gambar Penuh
-              </Button>
-            </Link>
-          </div>
-
-          <Button size="sm" variant="ghost" onClick={onClose} className="text-xs cursor-pointer">
+        <div className="px-5 sm:px-6 py-3.5 border-t border-border bg-muted/20 flex items-center justify-end">
+          <Button size="sm" variant="outline" onClick={onClose} className="text-xs cursor-pointer">
             Tutup
           </Button>
         </div>
